@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="bg-light ">
+    <nav class="navbar navbar-expand-lg navbar-light text-light-emphasis bg-dark justify-content-around">
+            <h1 class="card-title text-light mb-4">Welcome {{user.first_name}} {{user.last_name}}!</h1>
+            <div>
+                <a href="{{ url_for('edit_form', id=user.id) }}" class="btn d-inline-block text-light">Account</a>
+                <a href="/" class="btn d-inline-block text-light">Logout</a>
+            </div>
+    </nav>
+
+    <div class="d-flex justify-content-around align-items-start">
+        <form action="/books" method="post" class="col-4 bg-light p-4 my-5">
+            <h2 class="text-center">Add a New Book</h2>
+            <div class="form-group">
+                <label for="name" class="text-dark mb-1">Title: </label>
+                <input type="text" name="title" class="form-control" required>
+                <label for="name" class="text-dark mb-1">Description: </label>
+                <input type="text" name="description" class="form-control" required>
+            </div>
+            <input type="submit" value="Add Book" class="btn btn-dark mt-3">
+        </form>
+
+        <div class="col-4 p-4 my-5">
+            <h2 class="text-center">All Books</h2>
+            <table class="table border table-borderless">
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>
+                            <a href="/books/{{ book.id }}" class="list-group-item list-group-item-action">
+                                {{ book.title }}
+                            </a>
+                            <p>(added by {{ book.creator.first_name }} {{ book.creator.last_name }})</p>
+                            {% if session['user_id'] != book.user_id %}
+                                <a href="/favorite/{{book.id}}">Favorite this book</a>
+                            <!-- Needs to be linked to a method to check if a book is favorited by the user -->
+                            
+                                {% if book.is_favorite %}
+                                    <!-- | <a href="/favorite/{{ book.id }}" class="btn btn-primary btn-sm">Add to Favorites</a> -->
+                                {% else %}
+                                    <!-- | <a href="/unfavorite/{{ book.id }}" class="btn btn-secondary btn-sm">Unfavorite</a> -->
+                                {% endif %}
+                            {% else %}
+                                <!-- | <a href="/books/{{ book.id }}/delete" class="">Delete</a> -->
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    <!-- {% for book in books %}
+                    <tr>
+                        <td><a href="/books/{{book.id}}" class="list-group-item list-group-item-action">{{book.title}}</a> 
+                            <p>(added by {{book.creator.first_name}} {{book.creator.last_name}})</p>
+                            {% if session['user_id'] == book.creator.id %}
+                            |<a href="/books/{{book.id}}/delete" class="">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %} -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+1. Description of the project: Based on the project description on the platform, it will be a database where users will be able to register and login. the user will be able to add, and delete, and modify book entries they've made into the database while logged in. Otherwise they will only be able to view the titles and descriptions of books they did not upload as long as they are logged in. The books uploaded by a used will be automatically favorited by that user. Other users will also be able to favorite titles as the main page will display a list of all books uploaded by all users. 
+
+2. Which stack will i build it in? I will build it in Python and Flask while styling it using bootstrap. 
+
+3. Project will be on GitHub: link::  https://github.com/archiengine/book_club.git  
+
+4. .gitignore file will be in the project. 
+
+5. All of CRUD* on a non-User table: That table will be labeled books and will have all the CRUD functions applied to it. 
+
+6. CSS implemented, and possibly other static content: It will be styled with Bootstrap. 
+
+7. Data is validated upon create and edit, errors show: I intend to do these with flashes of errors. 
+
+8. Login and Registration with validations: I will have this. 
+
+9. Protected routes: i will have the routes only accessible while logged in.
+
+10. One to many relationships: I intend to do this by creating a users table and a books table. the books table will be linked to the users table via a foreign key. This will allow access to use the CRUD functions on the books database. 
+
+11. What will be my MVP, the parts that will be created first to satisfy the project requirements?: Everything in the wireframe from the platform (which I will send along with this message). 
+
+12. What are my stretch goals for after these minimums are met? Adding a favorites middle table for a many-to-many relationship. I would like to have images for the books and a nicely (professional looking) appearance
